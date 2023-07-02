@@ -619,8 +619,6 @@ void cloth::SwSolverKernel<T4f>::solveFabric()
 	const uint32_t* sBegin = mClothData.mSets;
 	const uint16_t* iBegin = mClothData.mIndices;
 
-	uint32_t totalConstraints = 0;
-
 	T4f stiffnessExponent = simd4f(mCloth.mStiffnessFrequency * mState.mIterDt);
 
 	//Loop through all phase configs
@@ -636,8 +634,6 @@ void cloth::SwSolverKernel<T4f>::solveFabric()
 
 		//Constraint particle indices
 		const uint16_t* iIt = iBegin + sIt[0] * 2; //x2 as we have 2 indices for every rest length
-
-		totalConstraints += uint32_t(rEnd - rIt);
 
 		// (stiffness, multiplier, compressionLimit, stretchLimit)
 		T4f config = load(&cIt->mStiffness);

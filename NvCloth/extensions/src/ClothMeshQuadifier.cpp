@@ -169,7 +169,6 @@ namespace
 		ps::sort(uniqueEdges.begin(), uniqueEdges.size(), UniqueEdge(0, 0, 0), ps::NonTrackingAllocator());
 
 		PxU32 writeIndex = 0, readStart = 0, readEnd = 0;
-		PxU32 numQuadEdges = 0;
 		while (readEnd < uniqueEdges.size())
 		{
 			while (readEnd < uniqueEdges.size() && uniqueEdges[readStart] == uniqueEdges[readEnd])
@@ -187,8 +186,6 @@ namespace
 
 			for (PxU32 i = 1; i < count; i++)
 				uniqueEdge.isQuadDiagonal &= uniqueEdges[readStart + i].isQuadDiagonal;
-
-			numQuadEdges += uniqueEdge.isQuadDiagonal ? 1 : 0;
 
 			uniqueEdges[writeIndex] = uniqueEdge;
 
@@ -263,8 +260,6 @@ namespace
 
 		const PxF32 maxAngle = PxSin(ps::degToRad(60.0f));
 
-		PxU32 numHiddenEdges = 0;
-
 		for (PxU32 i = 0; i < hideEdges.size(); i++)
 		{
 			UniqueEdge& uniqueEdge = uniqueEdges[hideEdges[i]];
@@ -288,7 +283,6 @@ namespace
 			if (numVisible == 4)
 			{
 				uniqueEdge.isQuadDiagonal = true;
-				numHiddenEdges++;
 			}
 		}
 	}
