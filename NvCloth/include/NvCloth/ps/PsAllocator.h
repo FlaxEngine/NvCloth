@@ -102,7 +102,7 @@
 #elif PX_APPLE_FAMILY
 #include <alloca.h>
 #define PxAlloca(x) alloca(x)
-#elif PX_PS4
+#elif PX_PS4 || PX_PS5
 #include <memory.h>
 #define PxAlloca(x) alloca(x)
 #elif PX_XBOXONE

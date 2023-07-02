@@ -46,7 +46,7 @@
 #define PX_FPU_GUARD shdfnd::FPUGuard scopedFpGuard;
 #define PX_SIMD_GUARD shdfnd::SIMDGuard scopedFpGuard;
 
-#define PX_SUPPORT_GUARDS (PX_WINDOWS_FAMILY || PX_XBOXONE || (PX_LINUX && (PX_X86 || PX_X64)) || PX_PS4 || PX_OSX)
+#define PX_SUPPORT_GUARDS (PX_WINDOWS_FAMILY || PX_XBOXONE || (PX_LINUX && (PX_X86 || PX_X64)) || PX_PS4 || PX_PS5 || PX_OSX)
 
 /** \brief NVidia namespace */
 namespace nv
@@ -95,7 +95,7 @@ NV_CLOTH_IMPORT void disableFPExceptions();
 
 #if PX_WINDOWS_FAMILY || PX_XBOXONE
 #include "windows/PsWindowsFPU.h"
-#elif (PX_LINUX && PX_SSE2) || PX_PS4 || PX_OSX
+#elif (PX_LINUX && PX_SSE2) || PX_PS4 || PX_PS5 || PX_OSX
 #include "unix/PsUnixFPU.h"
 #else
 PX_INLINE nv::cloth::ps::SIMDGuard::SIMDGuard()

@@ -153,7 +153,7 @@ cloth::SwSelfCollision<T4f>::SwSelfCollision(cloth::SwClothData& clothData, clot
 }
 
 template <typename T4f>
-cloth::SwSelfCollision<T4f>::~SwSelfCollision()
+cloth::SwSelfCollision<T4f>::~SwSelfCollision<T4f>()
 {
 }
 

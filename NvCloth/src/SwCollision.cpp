@@ -275,7 +275,7 @@ cloth::SwCollision<T4f>::SwCollision(SwClothData& clothData, SwKernelAllocator& 
 }
 
 template <typename T4f>
-cloth::SwCollision<T4f>::~SwCollision()
+cloth::SwCollision<T4f>::~SwCollision<T4f>()
 {
 	deallocate(mCurData);
 	deallocate(mPrevData);

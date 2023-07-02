@@ -157,7 +157,7 @@ cloth::SwInterCollision<T4f>::SwInterCollision(const cloth::SwInterCollisionData
 }
 
 template <typename T4f>
-cloth::SwInterCollision<T4f>::~SwInterCollision()
+cloth::SwInterCollision<T4f>::~SwInterCollision<T4f>()
 {
 }
 
