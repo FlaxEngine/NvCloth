@@ -78,7 +78,7 @@ Return the index of the highest set bit. Not valid for zero arg.
 PX_INLINE uint32_t lowestSetBit(uint32_t x)
 {
 	NV_CLOTH_ASSERT(x);
-	return lowestSetBitUnsafe(x);
+	return PxLowestSetBitUnsafe(x);
 }
 
 /*!
@@ -88,7 +88,7 @@ Return the index of the highest set bit. Not valid for zero arg.
 PX_INLINE uint32_t highestSetBit(uint32_t x)
 {
 	NV_CLOTH_ASSERT(x);
-	return highestSetBitUnsafe(x);
+	return PxHighestSetBitUnsafe(x);
 }
 
 // Helper function to approximate log2 of an integer value

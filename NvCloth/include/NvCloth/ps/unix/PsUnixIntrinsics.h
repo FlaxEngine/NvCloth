@@ -59,7 +59,7 @@ namespace ps
 {
 
 
-PX_FORCE_INLINE void memoryBarrier()
+PX_FORCE_INLINE void PxMemoryBarrier()
 {
 	__sync_synchronize();
 }
@@ -67,7 +67,7 @@ PX_FORCE_INLINE void memoryBarrier()
 /*!
 Return the index of the highest set bit. Undefined for zero arg.
 */
-PX_INLINE uint32_t highestSetBitUnsafe(uint32_t v)
+PX_INLINE uint32_t PxHighestSetBitUnsafe(uint32_t v)
 {
 
 	return 31 - __builtin_clz(v);
@@ -76,7 +76,7 @@ PX_INLINE uint32_t highestSetBitUnsafe(uint32_t v)
 /*!
 Return the index of the highest set bit. Undefined for zero arg.
 */
-PX_INLINE int32_t lowestSetBitUnsafe(uint32_t v)
+PX_INLINE int32_t PxLowestSetBitUnsafe(uint32_t v)
 {
 	return __builtin_ctz(v);
 }
@@ -84,7 +84,7 @@ PX_INLINE int32_t lowestSetBitUnsafe(uint32_t v)
 /*!
 Returns the index of the highest set bit. Returns 32 for v=0.
 */
-PX_INLINE uint32_t countLeadingZeros(uint32_t v)
+PX_INLINE uint32_t PxCountLeadingZeros(uint32_t v)
 {
 	if(v)
 		return __builtin_clz(v);
@@ -95,7 +95,7 @@ PX_INLINE uint32_t countLeadingZeros(uint32_t v)
 /*!
 Prefetch aligned 64B x86, 32b ARM around \c ptr+offset.
 */
-PX_FORCE_INLINE void prefetchLine(const void* ptr, uint32_t offset = 0)
+PX_FORCE_INLINE void PxPrefetchLine(const void* ptr, uint32_t offset = 0)
 {
 	__builtin_prefetch(reinterpret_cast<const char* PX_RESTRICT>(ptr) + offset, 0, 3);
 }
@@ -112,7 +112,7 @@ PX_FORCE_INLINE void prefetch(const void* ptr, uint32_t count = 1)
 	uint32_t lines = endLine - startLine + 1;
 	do
 	{
-		prefetchLine(cp);
+		PxPrefetchLine(cp);
 		cp += 32;
 	} while(--lines);
 }
@@ -125,32 +125,12 @@ PX_FORCE_INLINE void prefetch(const void* ptr, uint32_t count = 1)
 	uint64_t lines = endLine - startLine + 1;
 	do
 	{
-		prefetchLine(cp);
+		PxPrefetchLine(cp);
 		cp += 64;
 	} while(--lines);
 }
 #endif
 
-//! \brief platform-specific reciprocal
-PX_CUDA_CALLABLE PX_FORCE_INLINE float recipFast(float a)
-{
-	return 1.0f / a;
-}
-
-//! \brief platform-specific fast reciprocal square root
-PX_CUDA_CALLABLE PX_FORCE_INLINE float recipSqrtFast(float a)
-{
-	return 1.0f / ::sqrtf(a);
-}
-
-//! \brief platform-specific floor
-PX_CUDA_CALLABLE PX_FORCE_INLINE float floatFloor(float x)
-{
-	return ::floorf(x);
-}
-
-#define NS_EXPECT_TRUE(x) x
-#define NS_EXPECT_FALSE(x) x
 } // namespace ps
 } // namespace cloth
 } // namespace nv

@@ -199,7 +199,7 @@ class HashBase : private Allocator
 		const uint32_t sizeMinus1 = mEntriesCapacity - 1;
 		for(uint32_t i = 0; i < sizeMinus1; i++)
 		{
-			prefetchLine(mEntriesNext + i, 128);
+			PxPrefetchLine(mEntriesNext + i, 128);
 			mEntriesNext[i] = i + 1;
 		}
 		mEntriesNext[mEntriesCapacity - 1] = uint32_t(EOL);

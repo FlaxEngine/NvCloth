@@ -71,7 +71,7 @@ namespace ps
 /*
 * Implements a memory barrier
 */
-PX_FORCE_INLINE void memoryBarrier()
+PX_FORCE_INLINE void PxMemoryBarrier()
 {
 	_ReadWriteBarrier();
 	/* long Barrier;
@@ -83,7 +83,7 @@ PX_FORCE_INLINE void memoryBarrier()
 /*!
 Returns the index of the highest set bit. Not valid for zero arg.
 */
-PX_FORCE_INLINE uint32_t highestSetBitUnsafe(uint32_t v)
+PX_FORCE_INLINE uint32_t PxHighestSetBitUnsafe(uint32_t v)
 {
 	unsigned long retval;
 	_BitScanReverse(&retval, v);
@@ -93,7 +93,7 @@ PX_FORCE_INLINE uint32_t highestSetBitUnsafe(uint32_t v)
 /*!
 Returns the index of the highest set bit. Undefined for zero arg.
 */
-PX_FORCE_INLINE uint32_t lowestSetBitUnsafe(uint32_t v)
+PX_FORCE_INLINE uint32_t PxLowestSetBitUnsafe(uint32_t v)
 {
 	unsigned long retval;
 	_BitScanForward(&retval, v);
@@ -103,7 +103,7 @@ PX_FORCE_INLINE uint32_t lowestSetBitUnsafe(uint32_t v)
 /*!
 Returns the number of leading zeros in v. Returns 32 for v=0.
 */
-PX_FORCE_INLINE uint32_t countLeadingZeros(uint32_t v)
+PX_FORCE_INLINE uint32_t PxCountLeadingZeros(uint32_t v)
 {
 	if(v)
 	{
@@ -119,7 +119,7 @@ PX_FORCE_INLINE uint32_t countLeadingZeros(uint32_t v)
 Prefetch aligned cache size around \c ptr+offset.
 */
 #if !PX_ARM
-PX_FORCE_INLINE void prefetchLine(const void* ptr, uint32_t offset = 0)
+PX_FORCE_INLINE void PxPrefetchLine(const void* ptr, uint32_t offset = 0)
 {
 	// cache line on X86/X64 is 64-bytes so a 128-byte prefetch would require 2 prefetches.
 	// However, we can only dispatch a limited number of prefetch instructions so we opt to prefetch just 1 cache line
@@ -128,7 +128,7 @@ PX_FORCE_INLINE void prefetchLine(const void* ptr, uint32_t offset = 0)
 	_mm_prefetch(((const char*)ptr + offset), _MM_HINT_NTA);
 }
 #else
-PX_FORCE_INLINE void prefetchLine(const void* ptr, uint32_t offset = 0)
+PX_FORCE_INLINE void PxPrefetchLine(const void* ptr, uint32_t offset = 0)
 {
 	// arm does have 32b cache line size
 	__prefetch(((const char*)ptr + offset));
@@ -139,7 +139,7 @@ PX_FORCE_INLINE void prefetchLine(const void* ptr, uint32_t offset = 0)
 Prefetch \c count bytes starting at \c ptr.
 */
 #if !PX_ARM
-PX_FORCE_INLINE void prefetch(const void* ptr, uint32_t count = 1)
+PX_FORCE_INLINE void PxPrefetch(const void* ptr, uint32_t count = 1)
 {
 	const char* cp = (char*)ptr;
 	uint64_t p = size_t(ptr);
@@ -147,12 +147,12 @@ PX_FORCE_INLINE void prefetch(const void* ptr, uint32_t count = 1)
 	uint64_t lines = endLine - startLine + 1;
 	do
 	{
-		prefetchLine(cp);
+		PxPrefetchLine(cp);
 		cp += 64;
 	} while(--lines);
 }
 #else
-PX_FORCE_INLINE void prefetch(const void* ptr, uint32_t count = 1)
+PX_FORCE_INLINE void PxPrefetch(const void* ptr, uint32_t count = 1)
 {
 	const char* cp = (char*)ptr;
 	uint32_t p = size_t(ptr);
@@ -160,32 +160,11 @@ PX_FORCE_INLINE void prefetch(const void* ptr, uint32_t count = 1)
 	uint32_t lines = endLine - startLine + 1;
 	do
 	{
-		prefetchLine(cp);
+		PxPrefetchLine(cp);
 		cp += 32;
 	} while(--lines);
 }
 #endif
-
-//! \brief platform-specific reciprocal
-PX_CUDA_CALLABLE PX_FORCE_INLINE float recipFast(float a)
-{
-	return 1.0f / a;
-}
-
-//! \brief platform-specific fast reciprocal square root
-PX_CUDA_CALLABLE PX_FORCE_INLINE float recipSqrtFast(float a)
-{
-	return 1.0f / ::sqrtf(a);
-}
-
-//! \brief platform-specific floor
-PX_CUDA_CALLABLE PX_FORCE_INLINE float floatFloor(float x)
-{
-	return ::floorf(x);
-}
-
-#define NS_EXPECT_TRUE(x) x
-#define NS_EXPECT_FALSE(x) x
 
 } // namespace ps
 } // namespace cloth

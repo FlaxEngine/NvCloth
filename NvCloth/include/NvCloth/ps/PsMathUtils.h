@@ -95,7 +95,7 @@ x.
 */
 PX_CUDA_CALLABLE PX_FORCE_INLINE physx::PxF32 floor(const physx::PxF32 a)
 {
-	return floatFloor(a);
+	return ::floorf(a);
 }
 
 /**
