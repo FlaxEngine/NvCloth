@@ -139,7 +139,7 @@ NV_CLOTH_API(nv::cloth::PxAssertHandler*) GetNvClothAssertHandler(); //This func
 
 //Profiler
 physx::PxProfilerCallback* GetNvClothProfiler(); //Only use internally
-#if PX_DEBUG || PX_CHECKED || PX_PROFILE || 1
+#if PX_DEBUG || PX_CHECKED || PX_PROFILE
 class NvClothProfileScoped
 {
   public:
