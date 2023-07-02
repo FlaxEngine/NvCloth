@@ -219,7 +219,7 @@ This information allows the cooker to generate a fabric with higher quality simu
 \return The created cloth fabric, or NULL if creation failed.
 */
 NV_CLOTH_API(nv::cloth::Fabric*) NvClothCookFabricFromMesh(nv::cloth::Factory* factory,
-	const nv::cloth::ClothMeshDesc& desc, const physx::PxVec3& gravity,
+	const nv::cloth::ClothMeshDesc& desc, const float gravity[3],
 	nv::cloth::Vector<int32_t>::Type* phaseTypes = nullptr, bool useGeodesicTether = true);
 
 #endif // NV_CLOTH_EXTENSIONS_CLOTH_FABRIC_COOKER_H

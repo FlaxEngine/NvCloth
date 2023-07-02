@@ -704,11 +704,11 @@ NV_CLOTH_API(nv::cloth::ClothFabricCooker*) NvClothCreateFabricCooker()
 	return NV_CLOTH_NEW(nv::cloth::FabricCookerImpl);
 }
 
-NV_CLOTH_API(nv::cloth::Fabric*) NvClothCookFabricFromMesh( nv::cloth::Factory* factory, const nv::cloth::ClothMeshDesc& desc, const PxVec3& gravity, nv::cloth::Vector<int32_t>::Type* phaseTypes, bool useGeodesicTether )
+NV_CLOTH_API(nv::cloth::Fabric*) NvClothCookFabricFromMesh( nv::cloth::Factory* factory, const nv::cloth::ClothMeshDesc& desc, const float gravity[3], nv::cloth::Vector<int32_t>::Type* phaseTypes, bool useGeodesicTether )
 {
 	nv::cloth::FabricCookerImpl impl;
 
-	if(!impl.cook(desc, gravity, useGeodesicTether))
+	if(!impl.cook(desc, *(PxVec3*)gravity, useGeodesicTether))
 		return 0;
 
 	nv::cloth::CookedData data = impl.getCookedData();
