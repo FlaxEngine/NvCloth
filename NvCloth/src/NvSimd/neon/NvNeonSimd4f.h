@@ -294,7 +294,7 @@ void storeAligned(float* ptr, unsigned int offset, Simd4f const& v)
 	return storeAligned(reinterpret_cast<float*>(reinterpret_cast<char*>(ptr) + offset), v);
 }
 
-template <size_t i>
+template <NV_SIMD_SPLAT_TYPE i>
 Simd4f splat(Simd4f const& v)
 {
 	return vdupq_n_f32(array(v)[i]);

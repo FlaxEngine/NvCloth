@@ -200,10 +200,10 @@ class PxMat33
 	PX_CUDA_CALLABLE PX_INLINE const PxMat33 getInverse() const
 	{
 		const float det = getDeterminant();
-		PxMat33 inverse;
 
 		if(det != 0)
 		{
+			PxMat33 inverse;
 			const float invDet = 1.0f / det;
 
 			inverse.column0.x = invDet * (column1.y * column2.z - column2.y * column1.z);

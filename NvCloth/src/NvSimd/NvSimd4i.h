@@ -290,7 +290,7 @@ inline void storeAligned(int* ptr, unsigned int offset, const Simd4i& v);
 /*! \brief replicate i-th component into all vector components.
 * \return Vector with all elements set to \a v[i].
 * \relates Simd4i */
-template <size_t i>
+template <NV_SIMD_SPLAT_TYPE i>
 inline Simd4i splat(const Simd4i& v);
 
 /*! \brief Select \a v0 or \a v1 based on \a mask.

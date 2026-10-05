@@ -416,7 +416,7 @@ inline void storeAligned(float* ptr, unsigned int offset, Simd4f const& v);
 /*! \brief replicate i-th component into all vector components.
 * \return Vector with all elements set to \a v[i].
 * \relates Simd4f */
-template <size_t i>
+template <NV_SIMD_SPLAT_TYPE i>
 inline Simd4f splat(Simd4f const& v);
 
 /*! \brief Select \a v0 or \a v1 based on \a mask.

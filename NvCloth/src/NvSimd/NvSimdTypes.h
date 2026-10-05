@@ -68,6 +68,12 @@ void foo(const float* ptr)
 \endcode
 */
 
+#if defined(__NX__)
+#define NV_SIMD_SPLAT_TYPE std::size_t
+#else
+#define NV_SIMD_SPLAT_TYPE size_t
+#endif
+
 /*! \def NV_SIMD_SIMD
 * Define Simd4f and Simd4i, which map to four 32bit float or integer tuples.
 * */
